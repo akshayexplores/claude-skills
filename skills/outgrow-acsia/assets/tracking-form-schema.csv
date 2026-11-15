@@ -1,0 +1,11 @@
+field_name,type,required,options,notes
+date,date,auto,,"Pre-fill or auto-populate. Must never be typed by hand. Log same day."
+person,text,auto,,"Pre-fill or auto-populate from the logged-in user. Must never be typed by hand."
+account,text,auto,,"Dropdown or CRM link. Selected, not typed."
+contact,text,no,,Link to CRM Contact record where possible
+action_code,picklist,yes,"OG1.1 Did You Know|OG1.2 Reverse Did You Know|OG2.1 Pivot to Sale|OG2.2 Pivot to Next Conversation|OG3.1 Percentage of Business|OG4.1 Internal Referral Request|OG4.2 External Referral Request|OG5.1 Testimonial Shared",One of the eight actions. OG prefix slots into Acsia's existing micro-activity taxonomy.
+service_discussed,picklist,yes,"AUTOSAR|Functional Safety (ISO 26262)|Cybersecurity (ISO 21434)|ADAS/AD|Embedded|EV & e-Mobility|Telematics|Digital Cockpit & Display / IVI|V&V and Test|ASPICE Consulting|LiLA|None / relationship only",Maps to Acsia CRM Domain values plus LiLA
+estimated_value,number,yes,,"Rough guess in INR or USD. Magnitude matters, precision does not. Zero is a valid answer."
+channel,picklist,no,"Call|Voicemail + text|In person|Teams|WhatsApp|KakaoTalk|Video call",Email is not listed deliberately. Email is not an Outgrow action.
+opportunity_created,boolean,no,,Set later when something real emerges. Used to measure conversion rates at week 12.
+note,text,no,,"Optional. Must stay optional — the moment it is required, logging stops being 90 seconds."

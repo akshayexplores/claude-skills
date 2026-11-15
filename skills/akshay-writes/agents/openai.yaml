@@ -1,0 +1,4 @@
+interface:
+  display_name: "Akshay Writes"
+  short_description: "Write and speak in Akshay Sajeev’s voice"
+  default_prompt: "Use $akshay-writes to turn these notes into a draft that sounds like me."

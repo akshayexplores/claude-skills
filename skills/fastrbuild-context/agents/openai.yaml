@@ -1,0 +1,4 @@
+interface:
+  display_name: "FastrBuild Context"
+  short_description: "Canonical context for every FastrBuild decision"
+  default_prompt: "Use $fastrbuild-context to ground this work in FastrBuild's current fundamentals."

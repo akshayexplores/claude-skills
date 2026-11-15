@@ -1,0 +1,4 @@
+interface:
+  display_name: "FastrBuild Design Guide"
+  short_description: "Sea glass identity for FastrBuild visuals"
+  default_prompt: "Use $fastrbuild-design-guide to keep this FastrBuild design consistent with the approved visual identity."
