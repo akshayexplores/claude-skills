@@ -14,7 +14,7 @@ mkdir -p ~/.claude/skills
 cp -r claude-skills/skills/* ~/.claude/skills/
 ```
 
-Copy only the folders you want if you don't need all 47.
+Copy only the folders you want if you don't need all 58.
 
 **Another Claude account (claude.ai / desktop app)**
 
@@ -43,12 +43,13 @@ Same Claude account on another device needs nothing: skills sync with the accoun
 | `hyperframes-video` | HTML-to-MP4 video with HeyGen HyperFrames |
 | `skill-security-scan` | Scan a skill for security threats before installing |
 
-### Third-party packs (35)
+### Third-party packs (46)
 
 | Pack | Skills | Use |
 |---|---|---|
 | Superpowers | 14 x `superpowers-*` | Build discipline: brainstorm, plan, TDD, debug, review, verify |
 | Replica | 11 x `replica-*` | Clone an app end to end: recon, architect, design, build, test, launch |
+| Founder | 11 x `founder-*` | Test a business before launch: board, competitors, consumer panel, pricing, offer, CFO, marketing, brand, ops, launch, plan ([source](https://github.com/Jakeschincariol/founder-skill), MIT) |
 | Taste / design | `design-taste-frontend`, `design-taste-frontend-v1`, `high-end-visual-design`, `minimalist-ui`, `industrial-brutalist-ui`, `stitch-design-taste`, `image-to-code`, `imagegen-frontend-web`, `imagegen-frontend-mobile` | Frontend design direction and image-led UI |
 | Impeccable | `impeccable` | Frontend design, critique and polish |
 
