@@ -53,6 +53,16 @@ Same Claude account on another device needs nothing: skills sync with the accoun
 | Taste / design | `design-taste-frontend`, `design-taste-frontend-v1`, `high-end-visual-design`, `minimalist-ui`, `industrial-brutalist-ui`, `stitch-design-taste`, `image-to-code`, `imagegen-frontend-web`, `imagegen-frontend-mobile` | Frontend design direction and image-led UI |
 | Impeccable | `impeccable` | Frontend design, critique and polish |
 
+## Community packs (installed by script, not copied here)
+
+`./install-community-skills.sh` installs 24 more packs from their GitHub sources: Matt Pocock Skills, Ponytail, gstack, GSD, BMAD Method, UI UX Pro Max, Archify, Understand Anything, Diagram Design, REA, Graphify, Agent Reach, Career Ops, Headroom, Last 30 Days, OpenMontage, PPT Master, Humanizer, Marketing Skills (Corey Haines), ECC, Karpathy Skills, Caveman, Claude-Mem, I Have ADHD, Agent Skills (Addy Osmani), plus the Anthropic example skills not in the account (frontend-design, theme-factory, webapp-testing and others).
+
+Notes:
+- gstack installs with prefixed names (`/gstack-review`) so it does not clash with other `review`/`retro` skills. It also registers hooks (routing hints, destructive-command guard).
+- Claude-Mem, ECC, Caveman and Understand Anything install as plugins and need a restart to load. The script turns off Claude-Mem's default-on telemetry.
+- `last30days` reads browser cookie stores to reach X/Twitter, and `design` (UI UX Pro Max) reads `~/.claude/.env` for image-API keys. Both are by design; know it before using them on your own machine.
+- Scanned with SkillSpector (static) on 2026-11-20: no real threats; flags were template comments, test fixtures and docs about `.env` files.
+
 ## Not included on purpose
 
 - **Anthropic built-ins** (docx, pdf, pptx, xlsx, skill-creator, canvas-design, etc.): already present wherever Claude runs.
