@@ -14,7 +14,7 @@ mkdir -p ~/.claude/skills
 cp -r claude-skills/skills/* ~/.claude/skills/
 ```
 
-Copy only the folders you want if you don't need all 58.
+Copy only the folders you want if you don't need them all. Then run `./install-community-skills.sh` for the community packs and the listing overrides.
 
 **Another Claude account (claude.ai / desktop app)**
 
@@ -53,13 +53,34 @@ Same Claude account on another device needs nothing: skills sync with the accoun
 | Taste / design | `design-taste-frontend`, `design-taste-frontend-v1`, `high-end-visual-design`, `minimalist-ui`, `industrial-brutalist-ui`, `stitch-design-taste`, `image-to-code`, `imagegen-frontend-web`, `imagegen-frontend-mobile` | Frontend design direction and image-led UI |
 | Impeccable | `impeccable` | Frontend design, critique and polish |
 
+## Which skills Claude sees
+
+Too many skills crowd Claude's skill listing (about 1% of the context window), so most get listed by name only and the wrong one gets picked. `config/skill-overrides.json` keeps about 55 in the listing and makes the rest slash-only (`"user-invocable-only"`: hidden from Claude, still runnable as `/name`).
+
+| Purpose | Claude picks these on its own | Slash-only |
+|---|---|---|
+| Companies and brands | fastrbuild-*, lila-gtm, outgrow-acsia, secondbrain-* | |
+| Writing | akshay-writes, humanizer, kallaway-script-writer | |
+| Building software | Superpowers (14) | gstack, GSD, BMAD, Matt Pocock, Agent Skills, karpathy-guidelines, Ponytail |
+| UI design | design-taste-frontend, impeccable, `design-kit` | other Taste styles, UI UX Pro Max, frontend-design, theme-factory |
+| Diagrams | archify | diagram-design |
+| Office files | docx, xlsx, pdf, pptx | ppt-master, doc-coauthoring |
+| Video | hyperframes-video | OpenMontage (project folder) |
+| Research | deep-research, last30days, agent-reach | reverse-engineer-anything |
+| Codebases | graphify | |
+| Marketing | `marketing-kit` | Corey Haines' 53 skills, Anthropic marketing plugin |
+| Business ideas | `founder-kit` | founder-* (11) |
+| Other | saving-akshays-brain, morning, skill-security-scan, skill-creator, mcp-builder | Replica, career-ops, headroom |
+
+`marketing-kit`, `design-kit` and `founder-kit` are router skills: one short entry in the listing and a table that tells Claude which hidden skill's `SKILL.md` to read.
+
 ## Community packs (installed by script, not copied here)
 
-`./install-community-skills.sh` installs 24 more packs from their GitHub sources: Matt Pocock Skills, Ponytail, gstack, GSD, BMAD Method, UI UX Pro Max, Archify, Understand Anything, Diagram Design, REA, Graphify, Agent Reach, Career Ops, Headroom, Last 30 Days, OpenMontage, PPT Master, Humanizer, Marketing Skills (Corey Haines), ECC, Karpathy Skills, Caveman, Claude-Mem, I Have ADHD, Agent Skills (Addy Osmani), plus the Anthropic example skills not in the account (frontend-design, theme-factory, webapp-testing and others).
+`./install-community-skills.sh` installs 20 packs from their GitHub sources and then applies the overrides: Matt Pocock Skills, Ponytail, gstack, GSD, BMAD Method, UI UX Pro Max, Archify, Diagram Design, REA, Graphify, Agent Reach, Career Ops, Headroom, Last 30 Days, OpenMontage, PPT Master, Humanizer, Marketing Skills (Corey Haines), Karpathy Skills, I Have ADHD, Agent Skills (Addy Osmani), plus the Anthropic example skills not in the account.
 
 Notes:
-- gstack installs with prefixed names (`/gstack-review`) so it does not clash with other `review`/`retro` skills. It also registers hooks (routing hints, destructive-command guard).
-- Claude-Mem, ECC, Caveman and Understand Anything install as plugins and need a restart to load. The script turns off Claude-Mem's default-on telemetry.
+- gstack installs with prefixed names (`/gstack-review`) and without its per-prompt routing and contract hooks. Its destructive-command guard stays on.
+- Removed on purpose (2026-11-25): ECC (328 skills, 72 agents, ~30 hooks, overlaps everything), Caveman (your preferences already ask for short answers), Understand Anything (same job as Graphify), Claude-Mem (memory is wiped with each cloud container).
 - `last30days` reads browser cookie stores to reach X/Twitter, and `design` (UI UX Pro Max) reads `~/.claude/.env` for image-API keys. Both are by design; know it before using them on your own machine.
 - Scanned with SkillSpector (static) on 2026-11-20: no real threats; flags were template comments, test fixtures and docs about `.env` files.
 

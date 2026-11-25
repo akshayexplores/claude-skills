@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
-# Installs the community skill packs that are not in skills/ (Claude Code, user scope).
+# Installs the community skill packs that are not in skills/ (Claude Code, user scope),
+# then applies config/skill-overrides.json so only ~55 skills stay in the model's listing.
+# Run after copying skills/ into ~/.claude/skills (see README).
 # Each pack is installed the way its own README says to. Safe to re-run.
 # Needs: git, node/npx, bun (gstack), uv (graphify, agent-reach), python3.
 set -euo pipefail
@@ -21,7 +23,7 @@ copy() {
       local name; name="$(sed -n 's/^name:[[:space:]]*["'\'']\{0,1\}\([^"'\'']*\).*/\1/p' "$d/SKILL.md" | head -1)"
       name="${name:-$(basename "$d")}"
       [ -e "$SK/$name" ] && { echo "skip (exists): $name"; continue; }
-      cp -a "$d" "$SK/$name"
+      cp -aL "$d" "$SK/$name"   # -L: some packs ship SKILL.md as a symlink
     done
   done
 }
@@ -50,7 +52,7 @@ echo "== gstack (prefixed names: /gstack-review etc.)"
 if [ ! -d "$SK/gstack" ]; then
   git clone -q --single-branch --depth 1 https://github.com/garrytan/gstack.git "$SK/gstack"
 fi
-(cd "$SK/gstack" && ./setup --host claude --prefix --no-browser </dev/null)
+(cd "$SK/gstack" && ./setup --host claude --prefix --no-browser --no-skill-routing --no-skill-contracts </dev/null)
 
 echo "== GSD (from GitHub source; the npm package is marked deprecated)"
 gsd="$(clone gsd-build/get-shit-done)"
@@ -64,16 +66,18 @@ echo "== Agent Reach (GitHub release only; the PyPI 'agent-reach' is a different
 uv tool install -q --force https://github.com/Panniantong/Agent-Reach/releases/latest/download/agent-reach.zip
 agent-reach setup </dev/null >/dev/null
 
-echo "== Plugins"
-for m in Egonex-AI/Understand-Anything JuliusBrussee/caveman thedotmack/claude-mem affaan-m/ECC; do
-  claude plugin marketplace add "$m" >/dev/null 2>&1 || true
-done
-for p in understand-anything@understand-anything caveman@caveman claude-mem@thedotmack ecc@ecc; do
-  claude plugin install "$p" --scope user
-done
-npx -y claude-mem telemetry disable   # on by default upstream
-
 echo "== OpenMontage (a project you work inside, not a global skill)"
 [ -d "$HOME/OpenMontage" ] || git clone -q --depth 1 https://github.com/OpenMontageInc/OpenMontage.git "$HOME/OpenMontage"
 
-echo "Done. Restart Claude Code (or run /reload-plugins) so plugin skills load."
+echo "== Skill overrides (slash-only packs, routers cover the rest)"
+REPO="$(cd "$(dirname "$0")" && pwd)"
+python3 - "$REPO/config/skill-overrides.json" "$HOME/.claude/settings.json" <<'PY'
+import json, os, sys
+ov = json.load(open(sys.argv[1])); p = sys.argv[2]
+s = json.load(open(p)) if os.path.exists(p) else {}
+s.setdefault("skillOverrides", {}).update(ov)
+json.dump(s, open(p, "w"), indent=2)
+print(len(ov), "overrides applied")
+PY
+
+echo "Done. Restart Claude Code so the overrides take effect."
