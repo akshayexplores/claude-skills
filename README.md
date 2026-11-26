@@ -14,7 +14,7 @@ mkdir -p ~/.claude/skills
 cp -r claude-skills/skills/* ~/.claude/skills/
 ```
 
-Copy only the folders you want if you don't need all 58.
+Copy only the folders you want if you don't need all 150.
 
 **Another Claude account (claude.ai / desktop app)**
 
@@ -53,10 +53,27 @@ Same Claude account on another device needs nothing: skills sync with the accoun
 | Taste / design | `design-taste-frontend`, `design-taste-frontend-v1`, `high-end-visual-design`, `minimalist-ui`, `industrial-brutalist-ui`, `stitch-design-taste`, `image-to-code`, `imagegen-frontend-web`, `imagegen-frontend-mobile` | Frontend design direction and image-led UI |
 | Impeccable | `impeccable` | Frontend design, critique and polish |
 
+### Added from this Mac on 2026-11-26 (92)
+
+Backed up from `~/.claude/skills`. Licence files are kept where the source shipped one.
+
+| Group | Skills |
+|---|---|
+| Video, motion and editing (44) | `bang-motion`, `camera-3d-captions`, `claude-drawing`, `cut-mistakes`, `cut-silences`, `day-in-my-life`, `duo`, `edit-video`, `explainer-default`, `explainer-high-energy`, `huashu-art-motion`, `hyperframes`, `hyperframes-cli`, `hyperframes-registry`, `hyperframes-video-beats`, `launch-video`, `make-a-video`, `media-use`, `motion-brief-writer`, `motion-effects`, `motion-showreel`, `motionboard`, `motionmaxxing`, `p5-paint-animation`, `reference-to-motion`, `remotion-to-hyperframes`, `reverse-any-video`, `rhythm-pacing`, `saas-motion-video`, `session-story`, `short-form-edit`, `short-form-video`, `slideshow`, `sound-effects`, `stageshow`, `style-library`, `style-sampling`, `timing-mastery`, `video`, `video-motion-graphics`, `video-storytelling`, `video-talkcraft`, `vox-explainer`, `website-to-hyperframes` |
+| GSAP (8) | `gsap-core`, `gsap-frameworks`, `gsap-performance`, `gsap-plugins`, `gsap-react`, `gsap-scrolltrigger`, `gsap-timeline`, `gsap-utils` |
+| Trail of Bits security (16) | `tob-agentic-actions-auditor`, `tob-codeql`, `tob-coverage-analysis`, `tob-differential-review`, `tob-entry-point-analyzer`, `tob-fp-check`, `tob-mutation-testing`, `tob-post-patch-validation`, `tob-property-based-testing`, `tob-sarif-parsing`, `tob-second-opinion`, `tob-semgrep`, `tob-sharp-edges`, `tob-spec-to-code-compliance`, `tob-supply-chain-risk-auditor`, `tob-variant-analysis` |
+| ECC security and testing (10) | `ecc-agent-security-hardening`, `ecc-ai-regression-testing`, `ecc-browser-qa`, `ecc-e2e-testing`, `ecc-mcp-dependency-review`, `ecc-react-testing`, `ecc-security-review`, `ecc-security-scan`, `ecc-verification-loop`, `ecc-web-perimeter-owasp-2025-audit` |
+| Jeff (4) | `jeff-playwright-expert`, `jeff-secure-code-guardian`, `jeff-security-reviewer`, `jeff-test-master` |
+| Browser testing (2) | `playwright-cli`, `webapp-testing` |
+| Marketing (4) | `brand-intake`, `marketing-council`, `marketing-psychology`, `product-marketing` |
+| Other (4) | `figma`, `problem-diagnosis`, `prod-by-claude`, `x-posting-license` |
+
 ## Not included on purpose
 
 - **Anthropic built-ins** (docx, pdf, pptx, xlsx, skill-creator, canvas-design, etc.): already present wherever Claude runs.
 - **Anthropic plugins** (sales, finance, legal, HR, marketing, operations, product-management, data, design, productivity): reinstall from the plugin catalog.
+- **`synced/`** in `~/.claude/skills`: Claude's own synced copy of account skills, already covered above.
+- **`node_modules`** inside `video-talkcraft/workbench`: reinstall with `npm install` there.
 
 ## Updating
 
